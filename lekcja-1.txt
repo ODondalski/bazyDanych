@@ -1,0 +1,18 @@
+zad1.
+1. CREATE TABLE postac(id_postaci INT auto_increment, nazwa varchar(40), rodzaj enum('wiking', 'ptak', 'kobieta'), data_ur date, wiek int unsigned, primary key(id_postaci));
+2. INSERT INTO postac(nazwa, rodzaj, data_ur, wiek) values('Bjorn', 'wiking', '2000-01-02', 35)
+INSERT INTO postac(nazwa, rodzaj, data_ur, wiek) values('Drozd', 'ptak', '2013-04-05', 7)
+INSERT INTO postac(nazwa, rodzaj, data_ur, wiek) values('Tesciowa', 'kobieta', '1970-03-05', 50)
+3. UPDATE postac SET wiek = 88 WHERE nazwa = 'Tesciowa'
+zad2.
+1.CREATE TABLE walizka(id_walizki int auto_increment, pojemnosc int unsigned, kolor enum('rozowy', 'czerwony', 'teczowy', 'zolty'), id_wlasciciela int, primary key (id_walizki), foreign key(id_wlasciciela) references postac(id_postaci)
+2. ALTER TABLE walizka MODIFY kolor enum('rozowy', 'czerwony', 'teczowy', 'zolty') default 'rozowy'
+3. INSERT INTO walizka (pojemnosc, kolor, id_wlasciciela) values(10, 'czerwony', 1)
+INSERT INTO walizka (pojemnosc, kolor, id_wlasciciela) values(10, \teczowy', 3)
+zad3.
+1.CREATE TABLE izba(adres_budynku int ,nazwa_izby varchar(20), metraz int UNSIGNED, wlasciciel int, FOREIGN KEY(wlasciciel) REFERENCES postac(id_postaci), primary key(adres_budynku, nazwa_izby))
+2.ALTER TABLE izba add column kolor_izby VARCHAR(40) default 'czarny' after metraz;
+3.insert into izba (adres_budynku, nazwa_izby, metraz, kolor_izby, wlasciciel) values (23, 'spizarnia', 30, 'niebieski', 3);
+zad4.
+1.CREATE TABLE przetwory(id_przetworu int, rok_produkcji smallint default 1654, id_wykonawcy int, zawartosc VARCHAR(40), dodatek VARCHAR(40) default 'papryczka chilli', id_konsumenta int, primary key(id_przetworu), foreign key(id_wykonawcy) references postac(id_postaci), foreign key(id_konsumenta) references postac(id_postaci))
+
