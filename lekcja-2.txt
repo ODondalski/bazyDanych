@@ -18,12 +18,43 @@ alter table postac modify column rodzaj enum('wiking','ptak','kobieta','syrena')
 c)insert into postac(nazwa, rodzaj, data_ur, wiek, pesel) values('Gertruda Nieszczera', 'syrena', '1600-02-04', 420, '12345678910');
 
 zad 3.
+
 a)
 update postac set id_statku = 'Drakkar' where nazwa like '%a%';
 b)
 update statek set max_ladownosc = max_ladownosc * 0.7 where (data_wodowania between '1901-01-01' and '2000-01-01');
 c)
 alter table postac add check(wiek < 1000);
+zad 4.
+a)
+alter table postac modify rodzaj enum('wiking', 'ptak', 'kobieta', 'syrena', 'waz');
+insert into postac(nazwa, rodzaj, data_ur, wiek, pesel) values('Loko', 'waz', '1021-01-01', 999, '30295218212')
+b)
+create table marynarz like postac;
+insert into marynarz select * from postac where id_statku is not null;
+
+zad 5.
+
+a)
+update postac set id_statku = NULL where id_statku is not null;
+delete from marynarz where id_statku is not null;
+b)
+delete from postac where rodzaj = 'wiking' and nazwa = 'Einar';
+c)
+delete from statek where nazwa_statku is not null;
+d)
+alter table postac drop foreign key postac_ibfk_1;
+drop table statek;
+e)
+create table zwierz(
+    id int auto_increment,
+    nazwa varchar(40),
+    wiek int,
+    primary key(id));
+f)
+insert into zwierz (nazwa, wiek) values('ptak', 7);
+insert into zwierz (nazwa, wiek) values('waz', 999);
+
 
 
 
