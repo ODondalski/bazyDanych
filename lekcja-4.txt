@@ -1,0 +1,21 @@
+zad 1.
+
+1.
+select avg(waga) from kreatura where rodzaj like 'wiking';
+2.
+select avg(waga), count(idKreatury) as 'liczbaKreatur', rodzaj from kreatura group by rodzaj
+3.
+select avg(2020 - year(dataUr)) as SredniWiek, count(idKreatury) as iloscKreatur, rodzaj from kreatura group by rodzaj;
+
+zad 2.
+
+1.
+select sum(waga), rodzaj from zasob group by rodzaj;
+2.
+select nazwa, avg(waga) from zasob where ilosc > 3 group by nazwa having sum(waga) > 10;
+3.
+select rodzaj, count(nazwa) from zasob group by rodzaj having min(ilosc) > 1;
+
+zad 3.
+
+1.
