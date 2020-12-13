@@ -1,0 +1,42 @@
+zad 1.
+
+1.
+select avg(waga) from kreatura where rodzaj like 'wiking';
+2.
+select avg(waga), count(idKreatury) as 'liczbaKreatur', rodzaj from kreatura group by rodzaj
+3.
+select avg(2020 - year(dataUr)) as SredniWiek, count(idKreatury) as iloscKreatur, rodzaj from kreatura group by rodzaj;
+
+zad 2.
+
+1.
+select sum(waga), rodzaj from zasob group by rodzaj;
+2.
+select nazwa, avg(waga) from zasob where ilosc > 3 group by nazwa having sum(waga) > 10;
+3.
+select rodzaj, count(nazwa) from zasob group by rodzaj having min(ilosc) > 1;
+
+zad 3.
+
+1.
+select kreatura.idKreatury, ekwipunek.ilosc from kreatura inner join ekwipunek on kreatura.idKreatury = ekwipunek.idKreatury
+2.
+select kreatura.nazwa, zasob.nazwa from kreatura inner join ekwipunek on kreatura.Idkreatury=ekwipunek.Idkreatury  inner join zasob on ekwipunek.idzasobu=zasob.idzasobu order by kreatura.nazwa;
+3.
+select k.nazwa, k.idKreatury, e.idKreatury from kreatura k left join ekwipunek e ON k.idKreatury=e.idKreatury where e.idKreatury is not null;
+
+zad 4.
+
+1.
+select kreatura.nazwa,zasob.nazwa from kreatura natural join ekwipunek inner join zasob on zasob.idzasobu = ekwipunek.idzasobu where kreatura.rodzaj = 'wiking' and year(kreatura.dataUr) between 1670 and 1680 ;
+2.
+select k.nazwa from kreatura k, ekwipunek e, zasob z where k.idKreatury = e.idKreatury and e.idZasobu=z.idZasobu and z.rodzaj = 'jedzenie' order by year(k.dataUr) desc limit 5;
+3.
+select concatT(k1.nazwa, '-', k2.nazwa) FROM kreatura k1, kreatura k2 WHERE k1.idKreatury-k2.idKreatury=5 OR k1.idKreatury + k2.idKreatury = 5;
+
+zad 5.
+
+1.
+select k.rodzaj, avg(z.waga) from kreatura k, zasob z ,ekwipunek e where k.idKreatury=e.idKreatury and e.idZasobu=z.idZasobu and k.rodzaj <>'malpa' or k.rodzaj <>'waz' and z.ilosc < 30 group by k.rodzaj;
+2.
+select k.rodzaj, k.nazwa, min(k.dataUr) FROM kreatura k union select k.rodzaj, k.nazwa, max(k.dataUr) from kreatura k;
